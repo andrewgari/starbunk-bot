@@ -1,3 +1,5 @@
+package com.starbunk.bot
+
 import discord4j.core.DiscordClient
 import discord4j.core.event.domain.message.MessageCreateEvent
 import kotlinx.coroutines.flow.collect
