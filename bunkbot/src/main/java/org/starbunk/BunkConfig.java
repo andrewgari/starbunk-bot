@@ -23,11 +23,13 @@ public class BunkConfig {
                 .build()
                 .login()
                 .block();
-        for (BunkEventListener<T> listener : eventListeners) {
-            client.on(listener.getEventType())
-                    .flatMap(listener::execute)
-                    .onErrorResume(listener::handleError)
-                    .subscribe();
+        if (client != null) {
+            for (BunkEventListener<T> listener : eventListeners) {
+                client.on(listener.getEventType())
+                        .flatMap(listener::execute)
+                        .onErrorResume(listener::handleError)
+                        .subscribe();
+            }
         }
         return client;
     }

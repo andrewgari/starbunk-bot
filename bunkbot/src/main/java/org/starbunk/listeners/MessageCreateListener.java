@@ -1,6 +1,7 @@
 package org.starbunk.listeners;
 
 import discord4j.core.event.domain.message.MessageCreateEvent;
+import discord4j.core.object.entity.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,6 @@ public class MessageCreateListener extends MessageListener implements BunkEventL
     }
 
     public Mono<Void> execute(MessageCreateEvent event) {
-        log.info(event.getMessage().getContent());
         return processCommand(event.getMessage());
     }
 }
