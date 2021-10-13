@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0be5dba-e423-427f-a188-0cd764941995" name="Changes" comment="Added basic bot functionality. simply reads at the moment.">
-      <change afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/BluBot.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/ReplyBot.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/core/WebhookService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/listeners/MessageListener.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/BunkBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/BunkBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/BunkConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/BunkConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/listeners/MessageCreateListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/listeners/MessageCreateListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/listeners/MessageListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/listeners/bots/BluBot.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/src/main/resources/application.yml" afterDir="false" />
-    </list>
+    <list default="true" id="b0be5dba-e423-427f-a188-0cd764941995" name="Changes" comment="Refactored Flow of incoming messages.&#10;Added Webhook creation feature" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -165,7 +152,21 @@
       <option name="project" value="LOCAL" />
       <updated>1634137383807</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Refactored Flow of incoming messages.&#10;Added Webhook creation feature">
+      <created>1634159912239</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1634159912239</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Refactored Flow of incoming messages.&#10;Added Webhook creation feature">
+      <created>1634160035212</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1634160035212</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,7 +188,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="maven" />
     <MESSAGE value="Added basic bot functionality. simply reads at the moment." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added basic bot functionality. simply reads at the moment." />
+    <MESSAGE value="Refactored Flow of incoming messages.&#10;Added Webhook creation feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored Flow of incoming messages.&#10;Added Webhook creation feature" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -199,7 +201,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/core/WebhookService.kt</url>
-          <line>57</line>
+          <line>58</line>
           <properties>
             <option name="lambda-ordinal" value="0" />
           </properties>
