@@ -22,7 +22,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Build with Maven
-        run: mvn spring-boot:run -Dspring-boot.run.arguments=--token=${{secrets.DISCORD_TOKEN}}
+        run: cd bunkbot && mvn spring-boot:run -Dspring-boot.run.arguments=--token=${{secrets.DISCORD_TOKEN}}
       - name: Build and Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v4
         with:
