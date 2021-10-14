@@ -1,12 +1,11 @@
 package org.starbunk.listeners;
 
 import discord4j.core.event.domain.message.MessageCreateEvent;
-import discord4j.core.object.entity.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.starbunk.core.WebhookService;
+import org.starbunk.bots.webhooks.WebhookService;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -24,5 +23,3 @@ public class MessageCreateListener extends MessageListener implements BunkEventL
         return processCommand(event.getMessage());
     }
 }
-
-

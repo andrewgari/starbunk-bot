@@ -5,3 +5,4 @@ interface ReplyBot {
     val avatar: Any
     val response: String?
 }
+

@@ -1,4 +1,4 @@
-package org.starbunk.core
+package org.starbunk.bots.webhooks
 
 import discord4j.core.GatewayDiscordClient
 import discord4j.core.`object`.entity.Webhook
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service
 class WebhookService {
 
     @Autowired
-    lateinit var gatewayClient: GatewayDiscordClient
+    private lateinit var gatewayClient: GatewayDiscordClient
 
     @Autowired
     private lateinit var webClient: RestClient

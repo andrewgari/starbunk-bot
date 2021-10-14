@@ -4,7 +4,30 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0be5dba-e423-427f-a188-0cd764941995" name="Changes" comment="Core Architecture Complete&#10;Basic BluBot finished." />
+    <list default="true" id="b0be5dba-e423-427f-a188-0cd764941995" name="Changes" comment="Core Functionality is Complete.&#10;Added ClearWebhooks.kt to delete all webhooks">
+      <change afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/BunkBot.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/BunkConfig.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/commands/ClearWebhooks.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/commands/CommandBot.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_1_6_0_RC.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_test_1_5_31.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_common_1_6_0_RC.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_common_1_5_31.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_jdk7_1_6_0_RC.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_jdk7_1_5_31.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_jdk8_1_6_0_RC.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_jdk8_1_5_31.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_test_1_6_0_RC.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_1_5_31.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot/bunkbot-test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/bunkbot-test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/BunkBot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/BunkConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/BluBot.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/BluBot.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/ReplyBot.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/ReplyBot.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/core/WebhookService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/webhooks/WebhookService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/listeners/MessageCreateListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/listeners/MessageCreateListener.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,8 +55,8 @@
       <list>
         <option value="Kotlin File" />
         <option value="Class" />
-        <option value="Kotlin Class" />
         <option value="Kotlin Interface" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -62,21 +85,37 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="11" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/bunkbot-lite/bunkbot-lite.iml" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/bunkbot" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.34957984" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
-  <component name="RunManager" selected="Application.Unnamed">
-    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+  <component name="RecentsManager">
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="org.starbunk.bots.webhooks" />
+      <recent name="org.starbunk.bots" />
+      <recent name="org.starbunk.bots.commands" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Maven.Maven [spring-boot:run]">
+    <configuration name="BunkBot" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.starbunk.BunkBot" />
+      <module name="bunkbot" />
+      <option name="PROGRAM_PARAMETERS" value=" -Dspring-boot.run.arguments=--token='ODM2NDQ1OTIzMTA1MzA4Njcy.YIeG-A.Wm8aR57uEhbLawTY-U9574v24jQ'" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BunkBot" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.starbunk.BunkBot" />
       <module name="bunkbot" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="bunkbot-test [spring-boot:run]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+    <configuration name="Maven [spring-boot:run]" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
         <option name="myRunnerSettings" />
@@ -88,6 +127,7 @@
             <option name="goals">
               <list>
                 <option value="spring-boot:run" />
+                <option value="-Dspring-boot.run.arguments=--token=ODM2NDQ1OTIzMTA1MzA4Njcy.YIeG-A.Wm8aR57uEhbLawTY-U9574v24jQ" />
               </list>
             </option>
             <option name="pomFileName" />
@@ -99,6 +139,20 @@
           </MavenRunnerParameters>
         </option>
       </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="Debug Host" type="Remote">
+      <module name="bunkbot" />
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="8000" />
+      <option name="AUTO_RESTART" value="false" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="8000" />
+        <option name="LOCAL" value="false" />
+      </RunnerSettings>
       <method v="2" />
     </configuration>
     <configuration name="BunkBot" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
@@ -120,11 +174,18 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Unnamed" />
-      <item itemvalue="Maven.bunkbot-test [spring-boot:run]" />
+      <item itemvalue="Application.BunkBot" />
+      <item itemvalue="Kotlin.BunkBot" />
+      <item itemvalue="Maven.Maven [spring-boot:run]" />
+      <item itemvalue="Remote JVM Debug.Debug Host" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Kotlin.BunkBot" />
+      </list>
+    </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -137,6 +198,7 @@
       <updated>1633880758461</updated>
       <workItem from="1634051760123" duration="5330000" />
       <workItem from="1634127689301" duration="1826000" />
+      <workItem from="1634239126306" duration="458000" />
     </task>
     <task id="LOCAL-00001" summary="maven">
       <created>1633881456011</created>
@@ -173,7 +235,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634229828176</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Merge remote-tracking branch 'origin/main' into main&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;bunkbot/src/main/resources/application.yml">
+      <created>1634229940173</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1634229940173</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,35 +266,59 @@
     <MESSAGE value="Added basic bot functionality. simply reads at the moment." />
     <MESSAGE value="Refactored Flow of incoming messages.&#10;Added Webhook creation feature" />
     <MESSAGE value="Core Architecture Complete&#10;Basic BluBot finished." />
-    <option name="LAST_COMMIT_MESSAGE" value="Core Architecture Complete&#10;Basic BluBot finished." />
+    <MESSAGE value="Merge remote-tracking branch 'origin/main' into main&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;bunkbot/src/main/resources/application.yml" />
+    <MESSAGE value="Core Functionality is Complete.&#10;Added ClearWebhooks.kt to delete all webhooks" />
+    <option name="LAST_COMMIT_MESSAGE" value="Core Functionality is Complete.&#10;Added ClearWebhooks.kt to delete all webhooks" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/BluBot.kt</url>
-          <line>30</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/core/WebhookService.kt</url>
+          <url>file://$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/webhooks/WebhookService.kt</url>
           <line>43</line>
           <properties>
             <option name="lambda-ordinal" value="0" />
           </properties>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/commands/ClearWebhooks.kt</url>
+          <line>30</line>
+          <properties>
+            <option name="lambda-ordinal" value="0" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/commands/ClearWebhooks.kt</url>
+          <line>31</line>
+          <properties>
+            <option name="lambda-ordinal" value="0" />
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/commands/ClearWebhooks.kt</url>
+          <line>32</line>
+          <properties>
+            <option name="lambda-ordinal" value="0" />
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/webhooks/WebhookService.kt</url>
+          <line>22</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="message.data" language="kotlin" />
-        <watch expression="message.interaction" language="kotlin" />
-        <watch expression="message.reactions" language="kotlin" />
-        <watch expression="message.referencedMessage" language="kotlin" />
-        <watch expression="message.channel" language="kotlin" />
+        <watch expression="data.name().get()" language="kotlin" />
+        <watch expression="data.guildId().get().get().asLong()" language="kotlin" />
+        <watch expression="it.value.guild.block()" language="kotlin" />
+        <watch expression="message.con" language="kotlin" />
         <watch expression="regex.containsMatchIn(message.content)" language="kotlin" />
-        <watch expression="webClient.webhookService.getGuildWebhooks(856617421427441674).blockFirst()" language="kotlin" />
       </configuration>
     </watches-manager>
   </component>

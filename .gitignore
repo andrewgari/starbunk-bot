@@ -24,3 +24,4 @@ hs_err_pid*
 
 
 */application.yml
+/bunkbot/src/main/resources/application.yml

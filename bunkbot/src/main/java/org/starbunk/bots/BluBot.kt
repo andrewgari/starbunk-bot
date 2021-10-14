@@ -39,15 +39,13 @@ class BluBot : MessageCreateListener(), ReplyBot {
 
     private fun somebodySaidBlu(message: Message): Boolean {
         message.channel.cast(TextChannel::class.java).block()?.let { channel ->
-            if (message.content.equals("123123BluBlu")) {
-                webhookService.writeMessage(
-                    channel = channel,
-                    content = response,
-                    nickname = botName,
-                    avatarUrl = avatar
-                )
-                return true
-            }
+            webhookService.writeMessage(
+                channel = channel,
+                content = response,
+                nickname = botName,
+                avatarUrl = avatar
+            )
+            return true
         }
         return false
     }
