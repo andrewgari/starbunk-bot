@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0be5dba-e423-427f-a188-0cd764941995" name="Changes" comment="Refactored Flow of incoming messages.&#10;Added Webhook creation feature" />
+    <list default="true" id="b0be5dba-e423-427f-a188-0cd764941995" name="Changes" comment="Core Architecture Complete&#10;Basic BluBot finished.">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/BluBot.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/BluBot.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/core/WebhookService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/core/WebhookService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/listeners/MessageCreateListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/listeners/MessageCreateListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/src/main/resources/application.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -196,12 +203,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/BluBot.kt</url>
-          <line>31</line>
+          <line>30</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/core/WebhookService.kt</url>
-          <line>58</line>
+          <line>43</line>
           <properties>
             <option name="lambda-ordinal" value="0" />
           </properties>
