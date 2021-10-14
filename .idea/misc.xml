@@ -14,7 +14,6 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/response-bot/pom.xml" />
         <option value="$PROJECT_DIR$/bunkbot/pom.xml" />
       </list>
     </option>

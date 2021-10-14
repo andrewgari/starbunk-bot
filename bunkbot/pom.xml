@@ -4,35 +4,24 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>starbunk</groupId>
-    <artifactId>bunkbot</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <!-- Tell Maven we want to use Java 11 -->
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <kotlin.version>1.5.31</kotlin.version>
-    </properties>
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.5.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <repositories>
-        <repository>
-            <id>spring-releases</id>
-            <url>https://repo.spring.io/libs-release</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>spring-releases</id>
-            <url>https://repo.spring.io/libs-release</url>
-        </pluginRepository>
-    </pluginRepositories>
+    <groupId>org.starbunk</groupId>
+    <artifactId>bunkbot</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
+    <name>BunkBot</name>
+    <description>it asks when somebody sasys blu as well as other stuff</description>
+
+    <properties>
+        <java.version>11</java.version>
+        <kotlin.version>1.5.31</kotlin.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -41,26 +30,26 @@
             <version>3.2.0</version>
         </dependency>
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.6</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.5.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib-jdk8</artifactId>
-            <version>${kotlin.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test</artifactId>
-            <version>${kotlin.version}</version>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -68,7 +57,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.5.5</version>
             </plugin>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
@@ -77,40 +65,52 @@
                 <executions>
                     <execution>
                         <id>compile</id>
-                        <phase>compile</phase>
                         <goals>
                             <goal>compile</goal>
                         </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
+                                <sourceDir>${project.basedir}/src/main/java</sourceDir>
+                            </sourceDirs>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>test-compile</goal>
-                        </goals>
+                        <goals> <goal>test-compile</goal> </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
+                                <sourceDir>${project.basedir}/src/test/java</sourceDir>
+                            </sourceDirs>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <jvmTarget>11</jvmTarget>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <release>11</release>
-                </configuration>
+                <version>3.5.1</version>
                 <executions>
+                    <!-- Replacing default-compile as it is treated specially by maven -->
                     <execution>
-                        <id>compile</id>
+                        <id>default-compile</id>
+                        <phase>none</phase>
+                    </execution>
+                    <!-- Replacing default-testCompile as it is treated specially by maven -->
+                    <execution>
+                        <id>default-testCompile</id>
+                        <phase>none</phase>
+                    </execution>
+                    <execution>
+                        <id>java-compile</id>
                         <phase>compile</phase>
                         <goals>
                             <goal>compile</goal>
                         </goals>
                     </execution>
                     <execution>
-                        <id>testCompile</id>
+                        <id>java-test-compile</id>
                         <phase>test-compile</phase>
                         <goals>
                             <goal>testCompile</goal>
@@ -120,4 +120,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

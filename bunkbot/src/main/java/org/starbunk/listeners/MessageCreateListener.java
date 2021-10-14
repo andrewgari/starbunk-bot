@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.starbunk.bots.webhooks.WebhookService;
+import org.starbunk.bots.webhooks.WebhookComponent;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -13,7 +13,7 @@ public class MessageCreateListener extends MessageListener implements BunkEventL
     protected final Logger log = LoggerFactory.getLogger(MessageCreateListener.class.getName());
 
     @Autowired
-    protected WebhookService webhookService;
+    protected WebhookComponent webhookComponent;
 
     public Class<MessageCreateEvent> getEventType() {
         return MessageCreateEvent.class;

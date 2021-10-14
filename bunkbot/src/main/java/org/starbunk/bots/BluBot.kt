@@ -39,7 +39,7 @@ class BluBot : MessageCreateListener(), ReplyBot {
 
     private fun somebodySaidBlu(message: Message): Boolean {
         message.channel.cast(TextChannel::class.java).block()?.let { channel ->
-            webhookService.writeMessage(
+            webhookComponent.writeMessage(
                 channel = channel,
                 content = response,
                 nickname = botName,
