@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0be5dba-e423-427f-a188-0cd764941995" name="Changes" comment="Core Architecture Complete&#10;Basic BluBot finished.">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/BluBot.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/bots/BluBot.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/core/WebhookService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/core/WebhookService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/listeners/MessageCreateListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/src/main/java/org/starbunk/listeners/MessageCreateListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunkbot/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot/src/main/resources/application.yml" afterDir="false" />
-    </list>
+    <list default="true" id="b0be5dba-e423-427f-a188-0cd764941995" name="Changes" comment="Core Architecture Complete&#10;Basic BluBot finished." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -173,7 +166,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634160035212</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Core Architecture Complete&#10;Basic BluBot finished.">
+      <created>1634229828176</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1634229828176</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,7 +196,8 @@
     <MESSAGE value="maven" />
     <MESSAGE value="Added basic bot functionality. simply reads at the moment." />
     <MESSAGE value="Refactored Flow of incoming messages.&#10;Added Webhook creation feature" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactored Flow of incoming messages.&#10;Added Webhook creation feature" />
+    <MESSAGE value="Core Architecture Complete&#10;Basic BluBot finished." />
+    <option name="LAST_COMMIT_MESSAGE" value="Core Architecture Complete&#10;Basic BluBot finished." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
