@@ -4,29 +4,23 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd26b80b-4920-495f-883e-4ad2b583e403" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/starbunk/BunkBot.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/starbunk/BunkConfig.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/starbunk/bots/commands/ClearWebhooks.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/starbunk/bots/commands/CommandBot.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+    <list default="true" id="7df222ce-a457-4021-b4c3-dd43eb37b22f" name="Changes" comment="removed token">
+      <change afterPath="$PROJECT_DIR$/target/classes/META-INF/bunkbot-test.kotlin_module" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/META-INF/bunkbot.kotlin_module" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/logback.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/compile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/compile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-cli/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-cli/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/testCompile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_1_6_0_RC.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_test_1_5_31.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_common_1_6_0_RC.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_common_1_5_31.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_jdk7_1_6_0_RC.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_jdk7_1_5_31.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_jdk8_1_6_0_RC.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_jdk8_1_5_31.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_test_1_6_0_RC.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_1_5_31.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunkbot-test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bunkbot-test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/starbunk/BunkBot.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/starbunk/BunkConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/starbunk/bots/BluBot.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/starbunk/bots/BluBot.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/starbunk/bots/ReplyBot.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/starbunk/bots/ReplyBot.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/starbunk/core/WebhookService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/starbunk/bots/webhooks/WebhookService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/starbunk/listeners/MessageCreateListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/starbunk/listeners/MessageCreateListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BunkBot.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunkbot-test.iml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +66,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="org.tinygroup.studio.service.component.PackagePrefixConfigurable" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RunManager" selected="Maven.bunkbot [spring-boot:run...]">
     <configuration default="true" type="Applet">
@@ -120,7 +114,7 @@
             <option name="goals">
               <list>
                 <option value="spring-boot:run" />
-                <option value="-Dspring-boot.run.arguments=--token=ODM2NDQ1OTIzMTA1MzA4Njcy.YIeG-A.Wm8aR57uEhbLawTY-U9574v24jQ" />
+                <option value="-Dspring-boot.run.arguments=--token=ODM2NDQ1OTIzMTA1MzA4Njcy.YIeG-A.KmMUrweuPAlJftL04a1pdbO-LXE" />
               </list>
             </option>
             <option name="pomFileName" />
@@ -189,6 +183,14 @@
       <workItem from="1634059832244" duration="6024000" />
       <workItem from="1634127695353" duration="1692000" />
     </task>
+    <task id="LOCAL-00001" summary="removed token">
+      <created>1634241071462</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1634241071462</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,6 +207,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="removed token" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed token" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
