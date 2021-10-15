@@ -1,4 +1,4 @@
-package org.starbunk.listeners;
+package org.starbunk.bunkbot.listeners;
 
 import discord4j.core.event.domain.message.MessageUpdateEvent;
 import org.springframework.stereotype.Service;
@@ -17,6 +17,6 @@ public class MessageUpdateListener extends MessageListener implements BunkEventL
         return Mono.just(event)
                 .filter(MessageUpdateEvent::isContentChanged)
                 .flatMap(MessageUpdateEvent::getMessage)
-                .flatMap(super::processCommand);
+                .flatMap(super::processMessage);
     }
 }

@@ -1,4 +1,4 @@
-package org.starbunk.bots.webhooks
+package org.starbunk.bunkbot.service
 
 import discord4j.core.GatewayDiscordClient
 import discord4j.core.`object`.entity.Webhook

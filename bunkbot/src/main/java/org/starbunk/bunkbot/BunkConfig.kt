@@ -1,7 +1,9 @@
-package org.starbunk
+package org.starbunk.bunkbot
 
+import discord4j.common.util.Snowflake
 import discord4j.core.DiscordClientBuilder
 import discord4j.core.GatewayDiscordClient
+import discord4j.core.`object`.entity.User
 import discord4j.core.event.domain.Event
 import discord4j.discordjson.Id
 import discord4j.rest.RestClient
@@ -9,13 +11,17 @@ import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.starbunk.listeners.BunkEventListener
+import org.starbunk.bunkbot.listeners.BunkEventListener
 import java.lang.NullPointerException
 
 @Configuration
 open class BunkConfig {
     @Value("\${token}")
     private val token: String = ""
+
+    @Bean
+    @Qualifier (value = "vennId")
+    open fun vennId(): Long = 151120340343455744L
 
     @Bean
     @Qualifier(value = "selfId")

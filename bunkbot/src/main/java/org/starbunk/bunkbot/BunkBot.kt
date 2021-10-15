@@ -1,7 +1,6 @@
-package org.starbunk
+package org.starbunk.bunkbot
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.builder.SpringApplicationBuilder
 import org.springframework.boot.runApplication
 
 @SpringBootApplication(scanBasePackages = arrayOf("org.starbunk"))

@@ -1,4 +1,4 @@
-package org.starbunk.bots.commands
+package org.starbunk.bunkbot.bot.command
 
 interface CommandBot {
     val command: String
