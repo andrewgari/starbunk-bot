@@ -28,6 +28,14 @@ open class BunkConfig {
     open fun covaId(): Long = 139592376443338752
 
     @Bean
+    @Qualifier (value = "pickleId")
+    open fun pickleId(): Long = 486516247576444928
+
+    @Bean
+    @Qualifier (value = "guyId")
+    open fun guyId(): Long = 113035990725066752
+
+    @Bean
     @Qualifier(value = "selfId")
     open fun selfId(client: RestClient): Id {
         return client.self

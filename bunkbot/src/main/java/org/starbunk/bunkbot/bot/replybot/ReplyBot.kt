@@ -3,11 +3,14 @@ package org.starbunk.bunkbot.bot.replybot
 import discord4j.core.`object`.entity.Message
 import discord4j.core.`object`.entity.channel.TextChannel
 import org.starbunk.bunkbot.listeners.MessageCreateListener
+import reactor.core.publisher.Mono
 
 abstract class ReplyBot: MessageCreateListener() {
     abstract val botName: String
     abstract val avatar: String
     abstract val response: String
+    abstract val pattern: String
+    abstract val id: Long
 
     open fun writeMessage(channel: TextChannel?, message: String = response, avatarUrl: String = avatar, name: String = botName) {
         channel?.let { ch ->
@@ -19,6 +22,23 @@ abstract class ReplyBot: MessageCreateListener() {
             )
         }
     }
+
+    override fun processMessage(eventMessage: Message): Mono<Void> =
+        Mono.just(eventMessage)
+            .filter { it.isBot() }
+            .filter {
+                if (pattern.isNotBlank())
+                    it.matchesPattern(pattern)
+                else true
+            }
+            .filter {
+                if (id > 0) it.author.get().id.asLong() == id
+                else true
+            }
+            .flatMap { it.channel }
+            .cast(TextChannel::class.java)
+            .doOnNext(::writeMessage)
+            .then()
 
     fun Message.matchesPattern(pattern: String): Boolean {
         val regex = Regex(pattern, RegexOption.IGNORE_CASE)

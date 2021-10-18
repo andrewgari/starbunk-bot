@@ -18,7 +18,7 @@ class BluBot : ReplyBot() {
 
     @Autowired
     @Qualifier(value = "vennId")
-    private var vennId: Long = -1
+    override var id: Long = -1
 
     override val botName: String
         get() = "BluBot"
@@ -29,7 +29,7 @@ class BluBot : ReplyBot() {
     override val response: String
         get() = "Did somebody say Blu?"
 
-    private val pattern = "(blue?)|(specific color)|(primary color that'?s neither red n?or yellow bot)|(Green - yellow Bot)|(b lu)|(eulb)|"
+    override val pattern = "(blue?)|(specific color)|(primary color that'?s neither red n?or yellow bot)|(Green - yellow Bot)|(b lu)|(eulb)"
     private val bluePattern = ".*?(\\bblue?(bot)?\\b)|(bot)[^$]*$"
     private val blueNicePattern = "blue?bot,? say something nice about (.+$)"
     private val blueMeanPattern = ".*?\\bfuck|hate|die|kill|worst|mom|shit|bot\\b[^$]*$"
@@ -55,7 +55,6 @@ class BluBot : ReplyBot() {
 
     private fun handleRequestForBlu(message: Message): Boolean {
         return Mono.just(message)
-            .log()
             .map {
                 message.findMatches(blueNicePattern)
                     ?.groupValues ?: emptyList()
@@ -84,20 +83,14 @@ class BluBot : ReplyBot() {
     }
 
     private fun handleResponseToBlu(message: Message): Boolean {
-        log.debug("Response to Blu")
-        log.info("referencedMessage: ${message.referencedMessage.isPresent}")
-        log.info(message.timestamp.toString())
-        log.info(lastBluMessage.toString())
-        log.info(message.content)
         if (message.referencedMessage.isPresent || message.timestamp.withinFiveMinutesOf(lastBluMessage)) {
             log.info(message.author.get().username)
-            if (message.author.get().id.asLong() == vennId) {
+            if (message.author.get().id.asLong() == id) {
                 handleVennResponseToBlu(message)?.let {
                     return it
                 }
             }
             if (message.matchesPattern(bluePattern)) {
-                log.info("lol somebody definitely said blu")
                 writeMessage(
                     message.getTextChannel(),
                     avatarUrl = bluSmirkUrl,
@@ -105,12 +98,6 @@ class BluBot : ReplyBot() {
                 )
                 return false
             }
-        }
-        log.debug("Message is not five minutes before the last blu message")
-        try {
-            log.debug("The last blu message was at ${LocalDateTime.from(lastBluMessage)}")
-        } catch (e: Exception) {
-
         }
         return true
     }
@@ -128,14 +115,12 @@ class BluBot : ReplyBot() {
         Mono.just(message)
             .filter { message.matchesPattern(pattern) }
             .subscribe {
-                log.info("I think somebody said blu")
                 writeMessage(message.getTextChannel(), message = bluCuriousResponse)
             }
     }
 
     override fun writeMessage(channel: TextChannel?, message: String, avatarUrl: String, name: String) {
         channel?.let { ch ->
-            log.debug("Saving Blu Message: ${LocalDateTime.ofInstant(Instant.now(), ZoneOffset.UTC)}")
             lastBluMessage = Instant.now()
             super.writeMessage(ch, message, avatarUrl, name)
         }
