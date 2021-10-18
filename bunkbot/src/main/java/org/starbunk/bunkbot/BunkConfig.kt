@@ -21,7 +21,11 @@ open class BunkConfig {
 
     @Bean
     @Qualifier (value = "vennId")
-    open fun vennId(): Long = 151120340343455744L
+    open fun vennId(): Long = 151120340343455744
+
+    @Bean
+    @Qualifier (value = "covaId")
+    open fun covaId(): Long = 139592376443338752
 
     @Bean
     @Qualifier(value = "selfId")

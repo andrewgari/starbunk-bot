@@ -9,13 +9,15 @@ abstract class ReplyBot: MessageCreateListener() {
     abstract val avatar: String
     abstract val response: String
 
-    open fun writeMessage(channel: TextChannel, message: String = response) {
-        webhookComponent.writeMessage(
-            channel = channel,
-            content = message,
-            nickname = botName,
-            avatarUrl = avatar
-        )
+    open fun writeMessage(channel: TextChannel?, message: String = response, avatarUrl: String = avatar, name: String = botName) {
+        channel?.let { ch ->
+            webhookComponent.writeMessage(
+                channel = ch,
+                content = message,
+                nickname = name,
+                avatarUrl = avatarUrl
+            )
+        }
     }
 
     fun Message.matchesPattern(pattern: String): Boolean {

@@ -5,9 +5,12 @@ import discord4j.core.`object`.entity.channel.TextChannel
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
+import org.starbunk.bunkbot.utils.isBeforeToday
+import org.starbunk.bunkbot.utils.isFiveMinutesBefore
+import org.starbunk.bunkbot.utils.withinFiveMinutesOf
 import reactor.core.publisher.Mono
-import java.time.Instant
-import java.time.temporal.ChronoUnit
+import java.lang.Exception
+import java.time.*
 
 
 @Service
@@ -26,9 +29,21 @@ class BluBot : ReplyBot() {
     override val response: String
         get() = "Did somebody say Blu?"
 
-    private val pattern = "(blu(e)?)"
+    private val pattern = "(blue?)|(specific color)|(primary color that'?s neither red n?or yellow bot)|(Green - yellow Bot)|(b lu)|(eulb)|"
+    private val bluePattern = ".*?(\\bblue?(bot)?\\b)|(bot)[^$]*$"
+    private val blueNicePattern = "blue?bot,? say something nice about (.+$)"
+    private val blueMeanPattern = ".*?\\bfuck|hate|die|kill|worst|mom|shit|bot\\b[^$]*$"
+
+    private val bluMurderUrl = "https://imgur.com/Tpo8Ywd.jpg"
+    private val bluSmirkUrl = "https://i.imgur.com/dO4a59n.png"
+
+    private val bluCuriousResponse = "Did somebody say Blu?"
+    private val blueHappyResponse = "Lol, Somebody definitely said Blu! :smile:"
+    private val blueMurderResponse =
+        "What the fuck did you just fucking say about me, you little bitch? I'll have you know I graduated top of my class in the Academia d'Azul, and I've been involved in numerous secret raids on Western La Noscea, and I have over 300 confirmed kills. I've trained with gorillas in warfare and I'm the top bombardier in the entire Eorzean Alliance. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Shard, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of tonberries across Eorzea and your IP is being traced right now so you better prepare for the storm, macaroni boy. The storm that wipes out the pathetic little thing you call your life. You're fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bear-hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the Eorzean Blue Brigade and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little \"clever\" comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn't, you didn't, and now you're paying the price, you goddamn idiot. I will fucking cook you like the little macaroni boy you are. You're fucking dead, kiddo."
 
     private var lastBluMessage: Instant = Instant.MIN
+    private var lastBluMurder: Instant = Instant.MIN
 
     override fun processMessage(eventMessage: Message): Mono<Void> =
         Mono.just(eventMessage)
@@ -42,8 +57,7 @@ class BluBot : ReplyBot() {
         return Mono.just(message)
             .log()
             .map {
-                log.info("Checking Nice Regex")
-                message.findMatches("Blue?bot,? say something nice about (.*$)")
+                message.findMatches(blueNicePattern)
                     ?.groupValues ?: emptyList()
             }
             .filter {
@@ -70,40 +84,60 @@ class BluBot : ReplyBot() {
     }
 
     private fun handleResponseToBlu(message: Message): Boolean {
-        if (message.referencedMessage.isPresent ||
-            message.timestamp.isBefore(lastBluMessage?.plus(5, ChronoUnit.MINUTES))) {
+        log.debug("Response to Blu")
+        log.info("referencedMessage: ${message.referencedMessage.isPresent}")
+        log.info(message.timestamp.toString())
+        log.info(lastBluMessage.toString())
+        log.info(message.content)
+        if (message.referencedMessage.isPresent || message.timestamp.withinFiveMinutesOf(lastBluMessage)) {
+            log.info(message.author.get().username)
             if (message.author.get().id.asLong() == vennId) {
-                log.info("listen here you little shit")
-                // if he says a lot of bad words
-                // navy seal copy pasta
+                handleVennResponseToBlu(message)?.let {
+                    return it
+                }
             }
-            // if they mentioned the bot
-            // lol somebody definitely said blu
-            log.info("lol somebody definitely said blu")
-            log.debug(message.referencedMessage.toString())
-            log.debug("${message.timestamp.isBefore(lastBluMessage?.plus(5, ChronoUnit.MINUTES))}")
-            return false
+            if (message.matchesPattern(bluePattern)) {
+                log.info("lol somebody definitely said blu")
+                writeMessage(
+                    message.getTextChannel(),
+                    avatarUrl = bluSmirkUrl,
+                    message = blueHappyResponse
+                )
+                return false
+            }
+        }
+        log.debug("Message is not five minutes before the last blu message")
+        try {
+            log.debug("The last blu message was at ${LocalDateTime.from(lastBluMessage)}")
+        } catch (e: Exception) {
+
         }
         return true
     }
 
-    private fun handleVennResponseToBlu(message: Message) {
-
+    private fun handleVennResponseToBlu(message: Message): Boolean? {
+        if (message.matchesPattern(blueMeanPattern) && lastBluMurder.isBeforeToday()) {
+            log.info(blueMurderResponse)
+            writeMessage(message.getTextChannel(), message = blueMurderResponse, avatarUrl = bluMurderUrl)
+            return false
+        }
+        return null
     }
 
     private fun handleQueryForBlue(message: Message) {
         Mono.just(message)
-            .filter { message.matchesPattern("blue?") }
+            .filter { message.matchesPattern(pattern) }
             .subscribe {
-                message.getTextChannel()?.let { channel ->
-                    log.info("I think somebody said blu")
-                    writeMessage(channel, "Did Somebody Say Blu?")
-                }
+                log.info("I think somebody said blu")
+                writeMessage(message.getTextChannel(), message = bluCuriousResponse)
             }
     }
 
-    override fun writeMessage(channel: TextChannel, message: String) {
-        lastBluMessage = Instant.now()
-        super.writeMessage(channel, message)
+    override fun writeMessage(channel: TextChannel?, message: String, avatarUrl: String, name: String) {
+        channel?.let { ch ->
+            log.debug("Saving Blu Message: ${LocalDateTime.ofInstant(Instant.now(), ZoneOffset.UTC)}")
+            lastBluMessage = Instant.now()
+            super.writeMessage(ch, message, avatarUrl, name)
+        }
     }
 }

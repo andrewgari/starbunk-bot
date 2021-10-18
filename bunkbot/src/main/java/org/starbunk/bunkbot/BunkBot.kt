@@ -3,7 +3,7 @@ package org.starbunk.bunkbot
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
-@SpringBootApplication(scanBasePackages = arrayOf("org.starbunk"))
+@SpringBootApplication(scanBasePackages = ["org.starbunk"])
 open class BunkBot
 
 fun main(args: Array<String>) {

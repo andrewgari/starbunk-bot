@@ -16,7 +16,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <name>BunkBot</name>
-    <description>it asks when somebody sasys blu as well as other stuff</description>
+    <description>it asks when somebody says blu as well as other stuff</description>
 
     <properties>
         <java.version>11</java.version>
