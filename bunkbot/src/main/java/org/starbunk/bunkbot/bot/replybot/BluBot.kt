@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
 import org.starbunk.bunkbot.utils.isBeforeToday
-import org.starbunk.bunkbot.utils.isFiveMinutesBefore
-import org.starbunk.bunkbot.utils.withinFiveMinutesOf
+import org.starbunk.bunkbot.utils.isWithinFiveMinutesOf
 import reactor.core.publisher.Mono
-import java.lang.Exception
-import java.time.*
+import java.time.Instant
 
 
 @Service
@@ -76,14 +74,14 @@ class BluBot : ReplyBot() {
             .map { name ->
                 message.getTextChannel()?.let { channel ->
                     log.info("Okay, I'll say something nice about $name")
-                    writeMessage(channel, "$name, I think you're pretty Blu! :wink:")
+                    writeMessage1(channel, "$name, I think you're pretty Blu! :wink:")
                     false
                 }
             }.block() ?: true
     }
 
     private fun handleResponseToBlu(message: Message): Boolean {
-        if (message.referencedMessage.isPresent || message.timestamp.withinFiveMinutesOf(lastBluMessage)) {
+        if (message.referencedMessage.isPresent || message.timestamp.isWithinFiveMinutesOf(lastBluMessage)) {
             log.info(message.author.get().username)
             if (message.author.get().id.asLong() == id) {
                 handleVennResponseToBlu(message)?.let {
@@ -91,10 +89,11 @@ class BluBot : ReplyBot() {
                 }
             }
             if (message.matchesPattern(bluePattern)) {
-                writeMessage(
+                writeMessage1(
                     message.getTextChannel(),
                     avatarUrl = bluSmirkUrl,
-                    message = blueHappyResponse
+                    message = blueHappyResponse,
+                    response = true
                 )
                 return false
             }
@@ -105,7 +104,11 @@ class BluBot : ReplyBot() {
     private fun handleVennResponseToBlu(message: Message): Boolean? {
         if (message.matchesPattern(blueMeanPattern) && lastBluMurder.isBeforeToday()) {
             log.info(blueMurderResponse)
-            writeMessage(message.getTextChannel(), message = blueMurderResponse, avatarUrl = bluMurderUrl)
+            writeMessage1(
+                message.getTextChannel(),
+                message = blueMurderResponse,
+                avatarUrl = bluMurderUrl,
+                response = true)
             return false
         }
         return null
@@ -115,13 +118,13 @@ class BluBot : ReplyBot() {
         Mono.just(message)
             .filter { message.matchesPattern(pattern) }
             .subscribe {
-                writeMessage(message.getTextChannel(), message = bluCuriousResponse)
+                writeMessage1(message.getTextChannel(), message = bluCuriousResponse)
             }
     }
 
-    override fun writeMessage(channel: TextChannel?, message: String, avatarUrl: String, name: String) {
+    private fun writeMessage1(channel: TextChannel?, message: String, avatarUrl: String = avatar, name: String = botName, response: Boolean = false) {
         channel?.let { ch ->
-            lastBluMessage = Instant.now()
+            lastBluMessage = if (response) Instant.MIN else Instant.now()
             super.writeMessage(ch, message, avatarUrl, name)
         }
     }
