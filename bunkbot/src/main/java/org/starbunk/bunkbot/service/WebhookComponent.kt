@@ -3,6 +3,7 @@ package org.starbunk.bunkbot.service
 import discord4j.core.GatewayDiscordClient
 import discord4j.core.`object`.entity.Webhook
 import discord4j.core.`object`.entity.channel.TextChannel
+import discord4j.core.event.EventDispatcher.log
 import discord4j.discordjson.json.WebhookCreateRequest
 import discord4j.rest.RestClient
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,10 +21,11 @@ class WebhookComponent {
     private fun getWebhook(channel: TextChannel): Webhook? {
         var webhook = channel.webhooks
             .filter { webhook ->
-                !webhook.name.get().contains("BunkBot")
+                webhook.name.get().contains("BunkBot")
             }
             .blockFirst()
         if (webhook == null) {
+            log.debug("Creating WebHook")
             val webhookData = webClient.webhookService.createWebhook(
                 channel.id.asLong(),
                 WebhookCreateRequest.builder().name("BunkBot-${channel.name}").build(),
@@ -37,6 +39,9 @@ class WebhookComponent {
 
     fun writeMessage(channel: TextChannel, content: String, nickname: String, avatarUrl: String) {
         getWebhook(channel)?.apply {
+            this.name.map {
+                log.info("$it: $content")
+            }
             execute()
                 .withAvatarUrl(avatarUrl)
                 .withUsername(nickname)
