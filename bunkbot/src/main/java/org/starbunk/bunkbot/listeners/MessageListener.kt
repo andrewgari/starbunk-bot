@@ -14,3 +14,4 @@ abstract class MessageListener {
 
     fun Message.isBot(): Boolean = author.map { user -> !user.isBot }.orElse(false)
 }
+

@@ -36,6 +36,18 @@ open class BunkConfig {
     open fun guyId(): Long = 113035990725066752
 
     @Bean
+    @Qualifier (value = "guildusId")
+    open fun guildusId(): Long = 113776144012148737
+
+    @Bean
+    @Qualifier (value = "whaleWatchersId")
+    open fun whaleWatchersId(): Long = 767836161619525652
+
+    @Bean
+    @Qualifier (value = "afkChannelId")
+    open fun afkChannelId(): Long = 753251583902482637
+
+    @Bean
     @Qualifier(value = "selfId")
     open fun selfId(client: RestClient): Id {
         return client.self
