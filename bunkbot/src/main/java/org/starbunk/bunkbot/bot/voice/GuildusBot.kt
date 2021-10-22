@@ -6,40 +6,42 @@ import discord4j.core.event.domain.VoiceStateUpdateEvent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
+import org.starbunk.bunkbot.listeners.BunkEventListener.LOG
 import org.starbunk.bunkbot.listeners.VoiceListener
 import reactor.core.publisher.Mono
 
 @Service
-class GuildusBot: VoiceListener() {
+class GuildusBot : VoiceListener() {
 
     @Autowired
-    @Qualifier (value = "guildusId")
+    @Qualifier(value = "guildusId")
     private var guildusId: Long = -1
 
     @Autowired
-    @Qualifier (value = "whaleWatchersId")
+    @Qualifier(value = "whaleWatchersId")
     private var whaleWatchersId: Long = -1
 
     override fun processEvent(event: VoiceStateUpdateEvent): Mono<Void> =
         Mono.just(event)
-            .log()
             .filter { it.isJoinEvent }
             .filter { it.old.isEmpty }
-            .map {
-                event.current.userId.asLong()
-            }
+            .map { event.current.userId.asLong() }
             .filter { it == guildusId }
-            .doOnNext {
-                event.client
-                    .getChannelById(Snowflake.of(whaleWatchersId))
-                    .cast(TextChannel::class.java)
-                    .map { whaleWatchers ->
-                        webhookComponent?.writeMessage(
-                            channel = whaleWatchers,
-                            content = ":wave:",
-                            nickname = "GuildusBot",
-                            avatarUrl = "https://i.imgur.com/v3E8yWY.jpg")
-                    }
+            .flatMap {
+                event.client.getGuildChannels(event.current.guildId).map { it.guild }.blockFirst()
+            }
+            .map { starbunk ->
+                starbunk.channels.filter { it.id.asLong() == whaleWatchersId }.blockFirst()
+            }
+            .cast(TextChannel::class.java)
+            .doOnNext { whaleWatchers ->
+                webhookComponent?.writeMessage(
+                    channel = whaleWatchers,
+                    content = ":wave:",
+                    nickname = "GuildusBot",
+                    avatarUrl = "https://i.imgur.com/v3E8yWY.jpg"
+                )
+
             }
             .then()
 }
