@@ -27,8 +27,8 @@ class BluBot : ReplyBot() {
     override val response: String
         get() = "Did somebody say Blu?"
 
-    override val pattern = "(blue?)|(specific color)|(primary color that'?s neither red n?or yellow bot)|(Green - yellow Bot)|(b lu)|(eulb)"
-    private val bluePattern = ".*?(\\bblue?(bot)?\\b)|(bot)[^$]*$"
+    override val pattern = "(blue?)|(specific color)|(primary color that'?s neither red n?or yellow bot)|(Green - yellow Bot)|(b lu)|(eulb)|(azul)"
+    private val bluePattern = ".*?(\\bblue?(bot)?\\b)|(bot\\b)[^$]*$"
     private val blueNicePattern = "blue?bot,? say something nice about (.+$)"
     private val blueMeanPattern = ".*?\\bfuck|hate|die|kill|worst|mom|shit|bot\\b[^$]*$"
 
@@ -81,7 +81,7 @@ class BluBot : ReplyBot() {
     }
 
     private fun handleResponseToBlu(message: Message): Boolean {
-        if (message.referencedMessage.isPresent || message.timestamp.isWithinFiveMinutesOf(lastBluMessage)) {
+        if (message.timestamp.isWithinFiveMinutesOf(lastBluMessage)) {
             log.info(message.author.get().username)
             if (message.author.get().id.asLong() == id) {
                 handleVennResponseToBlu(message)?.let {
@@ -109,6 +109,7 @@ class BluBot : ReplyBot() {
                 message = blueMurderResponse,
                 avatarUrl = bluMurderUrl,
                 response = true)
+            lastBluMurder = message.timestamp
             return false
         }
         return null

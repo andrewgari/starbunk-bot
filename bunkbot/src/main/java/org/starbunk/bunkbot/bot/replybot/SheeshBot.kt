@@ -1,21 +1,25 @@
 package org.starbunk.bunkbot.bot.replybot
 
+import discord4j.core.`object`.entity.Message
+import discord4j.core.`object`.entity.channel.TextChannel
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
+import reactor.core.publisher.Mono
 import kotlin.random.Random
 
 @Service
 class SheeshBot: ReplyBot() {
+
+    private val random = Random.Default
+
     override val botName: String
         get() = "yuG"
     override val avatar: String
         get() = "https://imgur.com/4CqBg7F.png"
     override val response: String
-        get() {
-            val random = Random.Default.nextInt()
-            return "sh${"e".repeat(random)}sh"
-        }
+        get() = "sh${"e".repeat(random.nextInt(1,500))}sh"
+
     override val pattern: String
         get() = "sh(e+).sh"
 
@@ -23,17 +27,15 @@ class SheeshBot: ReplyBot() {
     @Qualifier(value = "guyId")
     override val id: Long = -1
 
-//    @Autowired
-//    @Qualifier(value = "guyId")
-//    private var guyId: Long = -1
-
-//    override fun processMessage(eventMessage: Message): Mono<Void> =
-//        Mono.just(eventMessage)
-//            .filter { it.isBot() }
-//            .filter { it.matchesPattern("sh(e+).sh") }
-//            .filter { it.author.get().id.asLong() == guyId }
-//            .map { it.channel }
-//            .cast(TextChannel::class.java)
-//            .doOnNext(::writeMessage)
-//            .then()
+    override fun processMessage(eventMessage: Message): Mono<Void> =
+            Mono.just(eventMessage)
+                    .log()
+                    .filter { it.isBot() }
+                    .filter { it.author.isPresent }
+                    .filter { it.matchesPattern(pattern) }
+                    .filter { it.author.get().id.asLong() == id }
+                    .flatMap { it.channel }
+                    .cast(TextChannel::class.java)
+                    .doOnNext(::writeMessage)
+                    .then()
 }

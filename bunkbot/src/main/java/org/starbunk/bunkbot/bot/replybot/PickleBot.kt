@@ -10,6 +10,8 @@ import kotlin.random.Random
 
 @Service
 class PickleBot: ReplyBot() {
+    private val random = Random.Default
+
     override val botName: String
         get() = "GremlinBot"
     override val avatar: String
@@ -25,18 +27,15 @@ class PickleBot: ReplyBot() {
     override fun processMessage(eventMessage: Message): Mono<Void> =
         Mono.just(eventMessage)
             .filter { it.isBot() }
-            .map { it.author.get().id.asLong() }
-            .filter { it == id }
-            .filter {
-                eventMessage.matchesPattern("gremlin") || roll20()
-            }
-            .map { eventMessage.channel }
+            .filter { it.author.isPresent }
+            .filter { eventMessage.matchesPattern("gremlin") || roll20() }
+            .filter { it.author.get().id.asLong() == id }
+            .flatMap { it.channel }
             .cast( TextChannel::class.java)
             .doOnNext(::writeMessage)
             .then()
 
     private fun roll20(): Boolean {
-        val random = Random.Default
         return random.nextInt(1, 20) > 17
     }
 }
