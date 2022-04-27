@@ -44,6 +44,10 @@ open class BunkConfig {
     open fun feliId(): Long = 120263103366692868
 
     @Bean
+    @Qualifier (value = "macaroniRole")
+    open fun macaroniRole(): Long = 836680699217444924
+
+    @Bean
     @Qualifier (value = "whaleWatchersId")
     open fun whaleWatchersId(): Long = 767836161619525652
 

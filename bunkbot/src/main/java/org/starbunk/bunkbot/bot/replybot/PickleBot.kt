@@ -27,15 +27,15 @@ class PickleBot: ReplyBot() {
     override fun processMessage(eventMessage: Message): Mono<Void> =
         Mono.just(eventMessage)
             .filter { it.isBot() }
-            .filter { it.author.isPresent }
-            .filter { eventMessage.matchesPattern("gremlin") || roll20() }
-            .filter { it.author.get().id.asLong() == id }
+            .filter { (eventMessage.matchesPattern("gremlin") || (roll20()) && it.author.get().id.asLong() == id) }
             .flatMap { it.channel }
             .cast( TextChannel::class.java)
             .doOnNext(::writeMessage)
             .then()
 
     private fun roll20(): Boolean {
-        return random.nextInt(1, 20) > 17
+        val roll = random.nextInt(1, 20)
+        println("Pickle Roll: $roll")
+        return roll > 17
     }
 }

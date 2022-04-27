@@ -27,7 +27,7 @@ class BluBot : ReplyBot() {
     override val response: String
         get() = "Did somebody say Blu?"
 
-    override val pattern = "(blue?)|(specific color)|(primary color that'?s neither red n?or yellow bot)|(Green - yellow Bot)|(b lu)|(eulb)|(azul)"
+    override val pattern = "\\b(blue?)|(bloo)|(specific color)|(primary color that'?s neither red n?or yellow bot)|(Green - yellow Bot)|(b lu)|(eulb)|(azul)|(azulbot)\\b"
     private val bluePattern = ".*?(\\bblue?(bot)?\\b)|(bot\\b)[^$]*$"
     private val blueNicePattern = "blue?bot,? say something nice about (.+$)"
     private val blueMeanPattern = ".*?\\bfuck|hate|die|kill|worst|mom|shit|bot\\b[^$]*$"
@@ -46,82 +46,49 @@ class BluBot : ReplyBot() {
     override fun processMessage(eventMessage: Message): Mono<Void> =
         Mono.just(eventMessage)
             .filter { it.isBot() }
-            .filter(::handleRequestForBlu)
-            .filter(::handleResponseToBlu)
-            .doOnNext(::handleQueryForBlue)
+            .doOnNext(::handleAllBlue)
             .then()
 
-    private fun handleRequestForBlu(message: Message): Boolean {
-        return Mono.just(message)
-            .map {
-                message.findMatches(blueNicePattern)
-                    ?.groupValues ?: emptyList()
+    private fun handleAllBlue(message: Message): Boolean {
+        if (message.findMatches(blueNicePattern)?.groupValues?.size ?: 0 == 2) {
+            // respond with "I think you're pretty blue
+            var name = message.findMatches(blueNicePattern)!!.groupValues[1] // replace 'me' with posters name
+            if (name == "me") {
+                name = message.author.map { it.username }.orElseGet { "Hey" }
             }
-            .filter {
-                it.size == 2
+            message.getTextChannel()?.let { channel ->
+                log.info("Okay, I'll say something nice about $name")
+                writeMessage1(channel, "$name, I think you're pretty Blu! :wink:")
+                false
             }
-            .map {
-                it.forEach { s -> log.info(s) }
-                it[1]
-            }
-            .map {
-                if (it == "me") {
-                    message.author.map { it.username }.orElseGet { "Hey" }
-                } else {
-                    it
-                }
-            }
-            .map { name ->
-                message.getTextChannel()?.let { channel ->
-                    log.info("Okay, I'll say something nice about $name")
-                    writeMessage1(channel, "$name, I think you're pretty Blu! :wink:")
-                    false
-                }
-            }.block() ?: true
-    }
-
-    private fun handleResponseToBlu(message: Message): Boolean {
-        if (message.timestamp.isWithinFiveMinutesOf(lastBluMessage)) {
-            log.info(message.author.get().username)
-            if (message.author.get().id.asLong() == id) {
-                handleVennResponseToBlu(message)?.let {
-                    return it
-                }
-            }
-            if (message.matchesPattern(bluePattern)) {
-                writeMessage1(
-                    message.getTextChannel(),
-                    avatarUrl = bluSmirkUrl,
-                    message = blueHappyResponse,
-                    response = true
-                )
+            return true;
+        } else if (isResponseToBlu(message)) { // message was posted within 5 minutes of the last blue message or is a reply
+            // determine how to respond
+            if (message.author.get().id.asLong() == id && message.matchesPattern(blueMeanPattern) && lastBluMurder.isBeforeToday()) { // was sent by ven
+                writeMessage1(message.getTextChannel(), message = blueMurderResponse, avatarUrl = bluMurderUrl, response = true)
+                lastBluMurder = message.timestamp // update murder tracker
                 return false
+            } else {
+                // somebody definitely said blu
+                if (message.matchesPattern(bluePattern)) {
+                    writeMessage1(message.getTextChannel(), avatarUrl = bluSmirkUrl, message = blueHappyResponse, response = true)
+                    return false
+                }
             }
+        } else if (message.matchesPattern(pattern)) {
+            writeMessage1(message.getTextChannel(), avatarUrl = avatar, message = bluCuriousResponse)
+            return false
         }
         return true
     }
 
-    private fun handleVennResponseToBlu(message: Message): Boolean? {
-        if (message.matchesPattern(blueMeanPattern) && lastBluMurder.isBeforeToday()) {
-            log.info(blueMurderResponse)
-            writeMessage1(
-                message.getTextChannel(),
-                message = blueMurderResponse,
-                avatarUrl = bluMurderUrl,
-                response = true)
-            lastBluMurder = message.timestamp
-            return false
-        }
-        return null
-    }
+    private fun isResponseToBlu(message: Message): Boolean =
+        if (message.referencedMessage.isPresent && message.referencedMessage.get().author.get().username == this.botName) {
+            true;
+        } else {
+            message.timestamp.isWithinFiveMinutesOf(lastBluMessage)
+        };
 
-    private fun handleQueryForBlue(message: Message) {
-        Mono.just(message)
-            .filter { message.matchesPattern(pattern) }
-            .subscribe {
-                writeMessage1(message.getTextChannel(), message = bluCuriousResponse)
-            }
-    }
 
     private fun writeMessage1(channel: TextChannel?, message: String, avatarUrl: String = avatar, name: String = botName, response: Boolean = false) {
         channel?.let { ch ->

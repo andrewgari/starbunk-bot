@@ -20,6 +20,10 @@ class MacaroniBot: ReplyBot() {
     @Qualifier(value = "vennId")
     override val id: Long = -1
 
+    @Autowired
+    @Qualifier(value = "macaroniRole")
+    val role: Long = -1
+
     override fun processMessage(eventMessage: Message): Mono<Void> =
         Mono.just(eventMessage)
             .filter { it.isBot() }
@@ -37,7 +41,7 @@ class MacaroniBot: ReplyBot() {
             writeMessage(
                 channel = message.getTextChannel(),
                 avatarUrl =  avatar,
-                message = "Are you trying to reach <@&{$id}>"
+                message = "Are you trying to reach <@&$role>"
             )
         }
     }
