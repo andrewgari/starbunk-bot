@@ -15,7 +15,7 @@ import java.time.Instant
 class BluBot : ReplyBot() {
 
     @Autowired
-    @Qualifier(value = "vennId")
+    @Qualifier(value = "covaId")
     override var id: Long = -1
 
     override val botName: String

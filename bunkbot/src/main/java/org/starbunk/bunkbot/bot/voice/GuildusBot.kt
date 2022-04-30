@@ -28,10 +28,7 @@ class GuildusBot : VoiceListener() {
             .map { event.current.userId.asLong() }
             .filter { it == guildusId }
             .flatMap {
-                event.client.getGuildChannels(event.current.guildId).map { it.guild }.blockFirst()
-            }
-            .map { starbunk ->
-                starbunk.channels.filter { it.id.asLong() == whaleWatchersId }.blockFirst()
+                event.client.getChannelById(Snowflake.of(whaleWatchersId))
             }
             .cast(TextChannel::class.java)
             .doOnNext { whaleWatchers ->

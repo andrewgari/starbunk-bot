@@ -36,7 +36,6 @@ class FeliBot : VoiceListener() {
                         event.client.getChannelById(Snowflake.of(whaleWatchersId)) //get the server instance
                     }
                     .cast(TextChannel::class.java)
-                    .publishOn(Schedulers.boundedElastic())
                     .doOnNext { whaleWatchers ->
                         webhookComponent?.writeMessage(
                                 channel = whaleWatchers,
@@ -55,10 +54,7 @@ class FeliBot : VoiceListener() {
                         it.privateChannel
                     }
                     .doOnNext { directChannel ->
-                        val msg = directChannel.createMessage("Good Night, Sweet Prince :heart:")
-                        msg.block()
-
+                        directChannel.createMessage("Good Night, Sweet Prince :heart:").block()
                     }
-                    .log()
                     .then()
 }
