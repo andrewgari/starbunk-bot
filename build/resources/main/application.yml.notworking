@@ -1,0 +1,39 @@
+starbunk:
+  users:
+    venn:
+      id: 151120340343455744
+    cova:
+      id: 139592376443338752
+    bender:
+      id: 135820819086573568
+    sig:
+      id: 486516247576444928
+    guy:
+      id: 113035990725066752
+    guildus:
+      id: 113776144012148737
+    feli:
+      id: 120263103366692868
+    deaf:
+      id: 115631499344216066
+  roles:
+    macaroni:
+      id: 836680699217444924
+    wet-bread:
+      id: 204326753215315968
+  channels:
+    whale-watchers:
+      type: text
+      id: 767836161619525652
+    afk:
+      type: voice
+      id: 753251583902482637
+    nebula-raid-announcements:
+      type: text
+      id: 925956838036475974
+    nebula-chat:
+      type: text
+      id: 925956744478343218
+    guy-dont-use-this-channel:
+      type: voice
+      id: 987456522969841824

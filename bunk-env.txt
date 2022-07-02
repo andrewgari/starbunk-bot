@@ -1,0 +1,1 @@
+VARIABLE1="--Dspring-boot.run.arguments=--token='ODM2NDQ1OTIzMTA1MzA4Njcy.YIeG-A.yXb9q0W7FqTuH78Z0sL_Qdc5fow'"

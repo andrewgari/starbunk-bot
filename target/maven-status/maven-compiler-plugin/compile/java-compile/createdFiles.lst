@@ -1,0 +1,6 @@
+org\starbunk\bunkbot\listeners\BunkEventListener.class
+org\starbunk\bunkbot\listeners\MessageDeleteListener.class
+org\starbunk\bunkbot\listeners\MessageUpdateListener.class
+org\starbunk\bunkbot\listeners\MessageCreateListener.class
+org\starbunk\bunkbot\listeners\JoinChannelListener.class
+org\starbunk\bunkbot\bot\OnlineTester.class
