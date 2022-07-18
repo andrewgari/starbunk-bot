@@ -1,10 +1,10 @@
 package org.starbunk.bunkbot.bot.voice
 
 import discord4j.common.util.Snowflake
-import discord4j.core.GatewayDiscordClient
 import discord4j.core.event.domain.VoiceStateUpdateEvent
 import discord4j.core.`object`.entity.Guild
 import discord4j.core.spec.GuildMemberEditSpec
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.starbunk.bunkbot.listeners.JoinChannelListener
 import reactor.core.publisher.Mono
@@ -23,15 +23,14 @@ abstract class GuyMoveBot: JoinChannelListener() {
 
     abstract val voiceChannel: Long;
 
-    protected val moveToLoungeSpec: GuildMemberEditSpec =
+    protected fun getGuild(): Guild =
+        this.gateway.getGuildById(Snowflake.of(guildId)).block() ?: throw Exception("Cannot get Guild from ID $guildId")
+
+
+    protected fun moveToLoungeSpec(): GuildMemberEditSpec =
         GuildMemberEditSpec.builder()
             .newVoiceChannelOrNull(Snowflake.of(loungeId))
             .build()
-
-
-    protected fun getGuild(gateway: GatewayDiscordClient): Guild? {
-        return gateway.getGuildById(Snowflake.of(guildId)).block()
-    }
 
     protected abstract fun filter(event: VoiceStateUpdateEvent): Boolean
 
@@ -40,7 +39,7 @@ abstract class GuyMoveBot: JoinChannelListener() {
         val guild = client.getGuildById(Snowflake.of(guildId)).block(Duration.ofSeconds(5))
         if (guild != null) {
             val guyAsGuildMember = guild.getMemberById(Snowflake.of(guyId)).block(Duration.ofSeconds(5))
-            guyAsGuildMember?.edit(moveToLoungeSpec)?.block(Duration.ofSeconds(5))
+            guyAsGuildMember?.edit(moveToLoungeSpec())?.block(Duration.ofSeconds(5))
         }
     }
 

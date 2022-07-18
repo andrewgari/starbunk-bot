@@ -53,7 +53,6 @@ open class WebhookComponent {
         content: String,
         nickname: String,
         avatarUrl: String,
-        embedData: MutableList<Embed> = ArrayList(),
         attatchments: MutableList<Attachment> = ArrayList()
     ) {
         getWebhook(channel)?.apply {

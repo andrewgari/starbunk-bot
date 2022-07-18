@@ -4,6 +4,8 @@ import discord4j.core.`object`.entity.Message
 import discord4j.discordjson.Id
 import discord4j.rest.RestClient
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Service
 import org.starbunk.bunkbot.listeners.MessageCreateListener
 import reactor.core.publisher.Mono
@@ -12,10 +14,17 @@ import reactor.core.publisher.Mono
 class ClearWebhooksCmd: MessageCreateListener(), CommandBot {
 
     @Autowired
+    @org.springframework.context.annotation.Lazy
     private lateinit var restClient: RestClient
 
-    @Autowired
-    private lateinit var selfId: Id
+    @Bean
+    @Qualifier(value = "selfId")
+    private fun selfId(client: RestClient): Id {
+        return client.self
+            .map { it.id() }
+            .blockOptional()
+            .orElseThrow()
+    }
 
     override val command: String
         get() = "!clearWebhooks"
@@ -27,13 +36,13 @@ class ClearWebhooksCmd: MessageCreateListener(), CommandBot {
             .map { it.id.asLong() }
             .map {
                 restClient.webhookService.getGuildWebhooks(it)
-                    .filter {
-                        it.user().get().id() == selfId
+                    .filter { data ->
+                        data.user().get().id() == selfId(restClient)
                     }
-                    .mapNotNull {
-                        log.warn("Deleting Webhook: ${it.name().get()}")
+                    .mapNotNull { data ->
+                        log.warn("Deleting Webhook: ${data.name().get()}")
                         restClient.webhookService
-                            .deleteWebhook(it.id().asLong(), "Cova Told Me to.")
+                            .deleteWebhook(data.id().asLong(), "Cova Told Me to.")
                             .block()
                     }
                     .blockLast()

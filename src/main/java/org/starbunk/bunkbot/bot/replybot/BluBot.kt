@@ -27,11 +27,11 @@ class BluBot : ReplyBot() {
     override val response: String
         get() = "Did somebody say Blu?"
 
-    override val pattern = ".*?\n(blue?|bloo|b lu|eulb|azul|azulbot)|(specific color)|(primary color that['s]? neither red n?or yellow bot)|(Green - yellow Bot)\n[^\$]*\$"
-    private val bluePattern = ".*?(\bblue?(bot)?\b)|(bot\b)|yes\b|no\b[^$]*$"
-    private val blueConfirmPattern = ".*?(\bblue|bot|yes|n\bo)"
+//    override val pattern = ".*?(\b(blue?|bloo|b lu|eulb|azul|azulbot)\n)|(specific color)|(primary color that['s]? neither red n?or yellow bot)|(Green - yellow Bot)[^\$]*\$"
+    override val pattern: String = ".*?\\b(blue?|bloo|b lu|eulb|azul|azulbot|cerulean)\\b[^$]*$"
+    private val blueConfirmPattern = ".*?\\b(blue?(bot)?)|(bot)|yes|no|yep|(i did)|(you got it)|(sure did)\\b[^$]*$"
     private val blueNicePattern = "blue?bot,? say something nice about (.+$)"
-    private val blueMeanPattern = ".*?\bfuck|hate|die|kill|worst|mom|shit|bot\b[^$]*$"
+    private val blueMeanPattern = "\\b(fuck(ing)?|hate|die|kill|worst|mom|shit|murder|bots?)\\b"
 
     private val bluMurderUrl = "https://imgur.com/Tpo8Ywd.jpg"
     private val bluSmirkUrl = "https://i.imgur.com/dO4a59n.png"
@@ -51,9 +51,13 @@ class BluBot : ReplyBot() {
     private fun getNameFromBluRequest(message: Message): String {
         val name = message.findMatches(blueNicePattern)?.let { matches ->
             matches.groupValues.let { groups ->
-                if (groups.size > 1)
-                    groups[1]
-                else
+                if (groups.size > 1) {
+                    val n = groups[1]
+                    if (n.lowercase() == "me")
+                        message.author.get().username
+                    else
+                        groups[1]
+                } else
                     "hey"
             }
         } ?: "hey"
@@ -61,13 +65,13 @@ class BluBot : ReplyBot() {
     }
 
     private fun isVennInsultingBlu(message: Message): Boolean =
-         message.author.get().id.asLong() == id && message.matchesPattern(blueMeanPattern) && lastBluMurder.isBeforeToday()
+         message.author.get().id.asLong() == id && message.matchesPattern(blueMeanPattern) && isResponseToBlu(message) && lastBluMurder.isBeforeToday()
 
     private fun isResponseToBlu(message: Message): Boolean =
         if (message.referencedMessage.isPresent && message.referencedMessage.get().author.get().username == this.botName) {
             true
         } else
-            message.matchesPattern(this.blueConfirmPattern) || message.matchesPattern(this.blueMeanPattern)
+            message.timestamp.isWithinFiveMinutesOf(this.lastBluMessage) && (message.matchesPattern(this.blueConfirmPattern) || message.matchesPattern(this.blueMeanPattern))
 
     private fun didSomebodySayBlu(message: Message): Boolean =
         message.matchesPattern(pattern)
@@ -96,10 +100,18 @@ class BluBot : ReplyBot() {
         writeMessage(message.getTextChannel(), "$name, I think you're pretty Blu! :wink:")
     }
 
+    private fun refuseToSaySomethingBlue(message: Message) {
+        log.info("Blubot doesn't like Venn")
+        writeMessage(message.getTextChannel(), "No way, Venn's a little blue loser. :unamused:")
+    }
+
     private fun handleAllBlue(message: Message): Boolean {
         return if (isRequestToSayBlu(message)) {
             val name = getNameFromBluRequest(message)
-            saySomethingNiceToUser(message, name)
+            if (name.lowercase() == "venn")
+                refuseToSaySomethingBlue(message)
+            else
+                saySomethingNiceToUser(message, name)
             false
         } else if (isVennInsultingBlu(message)) {
             murderVenn(message)
