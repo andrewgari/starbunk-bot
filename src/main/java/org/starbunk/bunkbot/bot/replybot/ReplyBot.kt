@@ -24,9 +24,12 @@ abstract class ReplyBot: MessageCreateListener() {
         }
     }
 
-    override fun processMessage(eventMessage: Message): Mono<Void> =
+    fun replyPipeline(eventMessage: Message): Mono<Message> =
         Mono.just(eventMessage)
             .filter { it.isBot() }
+
+    override fun processMessage(eventMessage: Message): Mono<Void> =
+        replyPipeline(eventMessage)
             .filter {
                 (if (pattern.isNotBlank()) it.matchesPattern(pattern) else true) && (if (id > 0) it.author.get().id.asLong() == id else true)
             }

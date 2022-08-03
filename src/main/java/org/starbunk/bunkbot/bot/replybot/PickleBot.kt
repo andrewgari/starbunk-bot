@@ -35,7 +35,6 @@ class PickleBot: ReplyBot() {
 
     private fun roll20(): Boolean {
         val roll = random.nextInt(1, 20)
-        println("Pickle Roll: $roll")
         return roll > 17
     }
 }
