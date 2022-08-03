@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service
 import org.starbunk.bunkbot.listeners.MessageCreateListener
 import reactor.core.publisher.Mono
 
-@Service
-class ClearWebhooksCmd: MessageCreateListener(), CommandBot {
+
+class ClearWebhooksCmd: CommandBot() {
 
     @Autowired
     @org.springframework.context.annotation.Lazy
@@ -23,7 +23,9 @@ class ClearWebhooksCmd: MessageCreateListener(), CommandBot {
         return client.self
             .map { it.id() }
             .blockOptional()
-            .orElseThrow()
+            .orElseThrow {
+                Exception("Error getting id")
+            }
     }
 
     override val command: String

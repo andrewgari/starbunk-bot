@@ -13,7 +13,8 @@ import org.starbunk.bunkbot.listeners.BunkEventListener
 
 @Configuration
 open class BunkConfig {
-    private val token: String = System.getenv("token")
+    @Value("\${token}")
+    private var token: String = ""
 
     @Bean
     open fun <T : Event> gatewayDiscordClient(eventListeners: List<BunkEventListener<T>>): GatewayDiscordClient {
