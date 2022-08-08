@@ -13,9 +13,9 @@ import kotlin.random.Random
 class VennBot() : ReplyBot() {
     override val botName: String = "Venn"
     override val avatar: String = ""
-    override val response: String = "Sorry, but that was mondo cringe..."
+    override val response: String = "Sorry, but that was über cringe..."
     override val pattern: String = ""
-    @Value("\${starbunk.users.cova.id}")
+    @Value("\${starbunk.users.venn.id}")
     override val id: Long = -1
 
     private val random = Random.Default
@@ -26,22 +26,22 @@ class VennBot() : ReplyBot() {
             .flatMap { it.channel }
             .cast( TextChannel::class.java)
             .doOnNext { channel ->
-                Mono.just(eventMessage)
+                val avatarUrl = Mono.just(eventMessage)
                     .flatMap(Message::getAuthorAsMember)
                     .map{ it.effectiveAvatarUrl }
-                    .doOnNext {  url ->
-                        writeMessage(channel, response, url, botName)
-                    }
                     .block()
+                val botName = Mono.just(eventMessage)
+                    .flatMap(Message::getAuthorAsMember)
+                    .map(Member::getDisplayName)
+                    .block()
+                if (avatarUrl != null && botName != null) {
+                    writeMessage(channel, response, avatarUrl, botName)
+                }
             }
             .then()
 
     private fun roll20(): Boolean {
         val roll = random.nextInt(1, 20)
         return roll > 15
-    }
-
-    override fun writeMessage(channel: TextChannel?, message: String, avatarUrl: String, name: String) {
-        super.writeMessage(channel, message, avatarUrl, name)
     }
 }

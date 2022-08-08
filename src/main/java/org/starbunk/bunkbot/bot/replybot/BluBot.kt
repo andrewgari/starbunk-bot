@@ -27,7 +27,6 @@ class BluBot : ReplyBot() {
     override val response: String
         get() = "Did somebody say Blu?"
 
-//    override val pattern = ".*?(\b(blue?|bloo|b lu|eulb|azul|azulbot)\n)|(specific color)|(primary color that['s]? neither red n?or yellow bot)|(Green - yellow Bot)[^\$]*\$"
     override val pattern: String = ".*?\\b(blue?|bloo|b lu|eulb|azul|azulbot|cerulean)\\b[^$]*$"
     private val blueConfirmPattern = ".*?\\b(blue?(bot)?)|(bot)|yes|no|yep|(i did)|(you got it)|(sure did)\\b[^$]*$"
     private val blueNicePattern = "blue?bot,? say something nice about (.+$)"

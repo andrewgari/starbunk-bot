@@ -33,4 +33,3 @@ public class MessageCreateListener extends MessageListener implements BunkEventL
         return processMessage(event.getMessage());
     }
 }
-

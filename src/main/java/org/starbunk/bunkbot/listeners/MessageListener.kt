@@ -4,7 +4,6 @@ import discord4j.core.GatewayDiscordClient
 import discord4j.core.`object`.entity.Message
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Lazy
-import org.starbunk.bunkbot.StarbunkProperties
 import reactor.core.publisher.Mono
 
 abstract class MessageListener {
